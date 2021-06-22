@@ -9,8 +9,8 @@ const FormComponent = () => {
 			lastname : '',
 			password: ''
 		},
-		onSubmit : () => {
-			console.log('On Submit', formik.values)
+		onSubmit : values => {
+			console.log('On Submit', values)
 		}
 	})
 
