@@ -1,5 +1,5 @@
 import React from 'react';
-import { useFormik } from 'formik'
+import { Formik, Form , Field, ErrorMessage} from 'formik'
 import * as Yup from 'yup'
 
 const FormComponent = () => {
@@ -20,57 +20,54 @@ const FormComponent = () => {
 		password : Yup.string().required('Password is required')
 	})
 
-	const formik = useFormik({
-		initialValues ,
-		onSubmit ,
-		validationSchema
-		// validate 
-	})
+	// const formik = useFormik({
+	// 	initialValues ,
+	// 	onSubmit ,
+	// 	validationSchema
+	// 	// validate 
+	// })
 
 	// console.log('formik Values', formik.values);
 	// console.log('formik Errors', formik.errors);
 	// console.log('formik touched', formik.touched);
 
     return (
-		<form onSubmit={formik.handleSubmit}>
-			<div className="formfield">
-				<label htmlFor="firstname">Name</label>
-				<input 
-					type="text" 
-					name='firstname' 
-					{...formik.getFieldProps('firstname')}
-				/>
-				{formik.touched.firstname && formik.errors.firstname ? (
-					<div className="error">{formik.errors.firstname}</div>
-				) : null}
-			</div>
+		<Formik
+			initialValues={initialValues}
+			validationSchema={validationSchema}
+			onSubmit={onSubmit}
+		>
+			<Form>
+				<div className="formfield">
+					<label htmlFor="firstname">Name</label>
+					<Field 
+						type="text" 
+						name='firstname' 
+					/>
+					<ErrorMessage name='firstname' />
+				</div>
 
-			<div className="formfield">
-				<label htmlFor="lastname">Lastname</label>
-				<input 
-					type="text" 
-					name='lastname' 
-					{...formik.getFieldProps('lastname')}
-				/>
-				{formik.touched.lastname && formik.errors.lastname ? (
-					<div className="error">{formik.errors.lastname}</div>
-				) : null}
-			</div>
+				<div className="formfield">
+					<label htmlFor="lastname">Lastname</label>
+					<Field 
+						type="text" 
+						name='lastname' 
+					/>
+					<ErrorMessage name='lastname' />
+				</div>
 
-			<div className="formfield">
-				<label htmlFor="password">Password</label>
-				<input 
-					type="password" 
-					name='password' 
-					{...formik.getFieldProps('password')}
-				/>
-				{formik.touched.password && formik.errors.password ? (
-					<div className="error">{formik.errors.password}</div>
-				) : null}
-			</div>
+				<div className="formfield">
+					<label htmlFor="password">Password</label>
+					<Field 
+						type="password" 
+						name='password' 
+					/>
+					<ErrorMessage name='password' />
+				</div>
 
-			<button type='submit'>Submit</button> 
-		</form>
+				<button type='submit'>Submit</button> 
+			</Form>
+		</Formik>
 	)
 }
 
