@@ -42,21 +42,33 @@ const FormComponent = () => {
 		validate 
 	})
 
+	// console.log('formik Values', formik.values);
+	// console.log('formik Errors', formik.errors);
+
     return (
 		<form onSubmit={formik.handleSubmit}>
 			<div className="formfield">
 				<label htmlFor="firstname">Name</label>
 				<input type="text" name='firstname' onChange={formik.handleChange} value={formik.values.firstname} />
+				{formik.errors.firstname ? (
+					<div className="error">{formik.errors.firstname}</div>
+				) : null}
 			</div>
 
 			<div className="formfield">
 				<label htmlFor="lastname">Lastname</label>
 				<input type="text" name='lastname' onChange={formik.handleChange} value={formik.values.lastname} />
+				{formik.errors.lastname ? (
+					<div className="error">{formik.errors.lastname}</div>
+				) : null}
 			</div>
 
 			<div className="formfield">
 				<label htmlFor="password">Password</label>
 				<input type="password" name='password' onChange={formik.handleChange} value={formik.values.password} />
+				{formik.errors.password ? (
+					<div className="error">{formik.errors.password}</div>
+				) : null}
 			</div>
 
 			<button type='submit'>Submit</button> 
