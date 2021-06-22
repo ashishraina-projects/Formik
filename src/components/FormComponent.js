@@ -8,12 +8,14 @@ const FormComponent = () => {
 			firstname : '',
 			lastname : '',
 			password: ''
+		},
+		onSubmit : () => {
+			console.log('On Submit', formik.values)
 		}
 	})
 
-	console.log('1 =>' , formik.values)
     return (
-		<form>
+		<form onSubmit={formik.handleSubmit}>
 			<div className="formfield">
 				<label htmlFor="firstname">Name</label>
 				<input type="text" name='firstname' onChange={formik.handleChange} value={formik.values.firstname} />
