@@ -14,28 +14,6 @@ const FormComponent = () => {
 		console.log('On Submit', values)
 	}
 
-	const validate =  values => {
-		//value.firstname , values.lastname , values.password
-		//errors.firstname , errors.lastname , errors.password
-
-		let errors = {}
-
-		if(!values.firstname){
-			errors.firstname = 'This Field is required'
-		}
-
-		if(!values.lastname){
-			errors.lastname = 'This Field is required'
-		}
-
-		if(!values.password){
-			errors.password = 'This Field is required'
-		} else if (/^[a-z0-9]+$/i.test(values.password)) {
-			errors.password = 'Invalid format'
-		}
-		return errors
-	}
-
 	const validationSchema = Yup.object({
 		firstname : Yup.string().required('First Name Field is Required'),
 		lastname : Yup.string().required('Last Name Field is Required'),
@@ -51,7 +29,7 @@ const FormComponent = () => {
 
 	// console.log('formik Values', formik.values);
 	// console.log('formik Errors', formik.errors);
-	console.log('formik touched', formik.touched);
+	// console.log('formik touched', formik.touched);
 
     return (
 		<form onSubmit={formik.handleSubmit}>
@@ -60,9 +38,7 @@ const FormComponent = () => {
 				<input 
 					type="text" 
 					name='firstname' 
-					onChange={formik.handleChange} 
-					onBlur={formik.handleBlur}
-					value={formik.values.firstname} 
+					{...formik.getFieldProps('firstname')}
 				/>
 				{formik.touched.firstname && formik.errors.firstname ? (
 					<div className="error">{formik.errors.firstname}</div>
@@ -74,9 +50,7 @@ const FormComponent = () => {
 				<input 
 					type="text" 
 					name='lastname' 
-					onChange={formik.handleChange} 
-					onBlur={formik.handleBlur}
-					value={formik.values.lastname}
+					{...formik.getFieldProps('lastname')}
 				/>
 				{formik.touched.lastname && formik.errors.lastname ? (
 					<div className="error">{formik.errors.lastname}</div>
@@ -88,9 +62,7 @@ const FormComponent = () => {
 				<input 
 					type="password" 
 					name='password' 
-					onChange={formik.handleChange}
-					onBlur={formik.handleBlur} 
-					value={formik.values.password} 
+					{...formik.getFieldProps('password')}
 				/>
 				{formik.touched.password && formik.errors.password ? (
 					<div className="error">{formik.errors.password}</div>
