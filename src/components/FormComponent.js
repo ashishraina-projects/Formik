@@ -1,5 +1,6 @@
 import React from 'react';
 import { useFormik } from 'formik'
+import * as Yup from 'yup'
 
 const FormComponent = () => {
 
@@ -35,10 +36,17 @@ const FormComponent = () => {
 		return errors
 	}
 
+	const validationSchema = Yup.object({
+		firstname : Yup.string().required('First Name Field is Required'),
+		lastname : Yup.string().required('Last Name Field is Required'),
+		password : Yup.string().required('Password is required')
+	})
+
 	const formik = useFormik({
 		initialValues ,
 		onSubmit ,
-		validate 
+		validationSchema
+		// validate 
 	})
 
 	// console.log('formik Values', formik.values);
