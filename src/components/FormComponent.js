@@ -32,7 +32,6 @@ const FormComponent = () => {
 		} else if (/^[a-z0-9]+$/i.test(values.password)) {
 			errors.password = 'Invalid format'
 		}
-		console.log( 'errors' , errors)
 		return errors
 	}
 
@@ -44,29 +43,48 @@ const FormComponent = () => {
 
 	// console.log('formik Values', formik.values);
 	// console.log('formik Errors', formik.errors);
+	console.log('formik touched', formik.touched);
 
     return (
 		<form onSubmit={formik.handleSubmit}>
 			<div className="formfield">
 				<label htmlFor="firstname">Name</label>
-				<input type="text" name='firstname' onChange={formik.handleChange} value={formik.values.firstname} />
-				{formik.errors.firstname ? (
+				<input 
+					type="text" 
+					name='firstname' 
+					onChange={formik.handleChange} 
+					onBlur={formik.handleBlur}
+					value={formik.values.firstname} 
+				/>
+				{formik.touched.firstname && formik.errors.firstname ? (
 					<div className="error">{formik.errors.firstname}</div>
 				) : null}
 			</div>
 
 			<div className="formfield">
 				<label htmlFor="lastname">Lastname</label>
-				<input type="text" name='lastname' onChange={formik.handleChange} value={formik.values.lastname} />
-				{formik.errors.lastname ? (
+				<input 
+					type="text" 
+					name='lastname' 
+					onChange={formik.handleChange} 
+					onBlur={formik.handleBlur}
+					value={formik.values.lastname}
+				/>
+				{formik.touched.lastname && formik.errors.lastname ? (
 					<div className="error">{formik.errors.lastname}</div>
 				) : null}
 			</div>
 
 			<div className="formfield">
 				<label htmlFor="password">Password</label>
-				<input type="password" name='password' onChange={formik.handleChange} value={formik.values.password} />
-				{formik.errors.password ? (
+				<input 
+					type="password" 
+					name='password' 
+					onChange={formik.handleChange}
+					onBlur={formik.handleBlur} 
+					value={formik.values.password} 
+				/>
+				{formik.touched.password && formik.errors.password ? (
 					<div className="error">{formik.errors.password}</div>
 				) : null}
 			</div>
