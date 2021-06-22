@@ -3,15 +3,43 @@ import { useFormik } from 'formik'
 
 const FormComponent = () => {
 
-	const formik = useFormik({
-		initialValues : {
-			firstname : '',
-			lastname : '',
-			password: ''
-		},
-		onSubmit : values => {
-			console.log('On Submit', values)
+	const initialValues = {
+		firstname : '',
+		lastname : '',
+		password: ''
+	}
+
+	const onSubmit = values => {
+		console.log('On Submit', values)
+	}
+
+	const validate =  values => {
+		//value.firstname , values.lastname , values.password
+		//errors.firstname , errors.lastname , errors.password
+
+		let errors = {}
+
+		if(!values.firstname){
+			errors.firstname = 'This Field is required'
 		}
+
+		if(!values.lastname){
+			errors.lastname = 'This Field is required'
+		}
+
+		if(!values.password){
+			errors.password = 'This Field is required'
+		} else if (/^[a-z0-9]+$/i.test(values.password)) {
+			errors.password = 'Invalid format'
+		}
+		console.log( 'errors' , errors)
+		return errors
+	}
+
+	const formik = useFormik({
+		initialValues ,
+		onSubmit ,
+		validate 
 	})
 
     return (
