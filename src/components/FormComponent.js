@@ -1,6 +1,7 @@
 import React from 'react';
 import { Formik, Form , Field, ErrorMessage} from 'formik'
 import * as Yup from 'yup'
+import Error from './Error.js'
 
 const FormComponent = () => {
 
@@ -47,7 +48,7 @@ const FormComponent = () => {
 						name='firstname' 
 						placeholder='First Name'
 					/>
-					<ErrorMessage name='firstname' />
+					<ErrorMessage name='firstname' component={Error} />
 				</div>
 
 				<div className="formfield">
@@ -56,8 +57,13 @@ const FormComponent = () => {
 						type="text" 
 						name='lastname'
 						placeholder='Last Name'
-					/>
-					<ErrorMessage name='lastname' />
+					>
+					</Field>
+					<ErrorMessage name='lastname' >
+						{
+							(errorMsg) => <div className='error'>{errorMsg}</div>
+						}
+					</ErrorMessage>
 				</div>
 
 				<div className="formfield">
@@ -67,7 +73,7 @@ const FormComponent = () => {
 						name='password' 
 						placeholder='Password'
 					/>
-					<ErrorMessage name='password' />
+					<ErrorMessage name='password' component={Error}/>
 				</div>
 
 				<div className="formfield">
@@ -77,7 +83,7 @@ const FormComponent = () => {
 						name='comment' 
 						placeholder='Type your comment here...'
 					/>
-					<ErrorMessage name='comment' />
+					<ErrorMessage name='comment' component={Error} />
 				</div>
 
 
