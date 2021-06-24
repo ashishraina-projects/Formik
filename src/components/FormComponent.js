@@ -10,7 +10,11 @@ const FormComponent = () => {
 		lastname : '',
 		password: '',
 		comment: '',
-		address:''
+		address:'',
+		social: {
+			facebook:'',
+			twitter: ''
+		}
 	}
 
 	const onSubmit = values => {
@@ -100,7 +104,23 @@ const FormComponent = () => {
 							)
 						}}
 					</Field>
-					<ErrorMessage name='comment' />
+					<ErrorMessage name='address' />
+
+				<div className="formfield">
+					<label htmlFor="facebook">Facebook: </label>
+					<Field 
+						name='social.facebook' 
+					/>
+					<ErrorMessage name='social.twitter' component={Error} />
+				</div>
+
+				<div className="formfield">
+					<label htmlFor="twitter">Comments: </label>
+					<Field 
+						name='social.twitter' 
+					/>
+					<ErrorMessage name='social.twitter' component={Error} />
+				</div>
 				</div>
 
 				<button type='submit'>Submit</button> 
