@@ -14,7 +14,8 @@ const FormComponent = () => {
 		social: {
 			facebook:'',
 			twitter: ''
-		}
+		},
+		phoneNumbers : ['','']
 	}
 
 	const onSubmit = values => {
@@ -105,6 +106,7 @@ const FormComponent = () => {
 						}}
 					</Field>
 					<ErrorMessage name='address' />
+				</div>
 
 				<div className="formfield">
 					<label htmlFor="facebook">Facebook: </label>
@@ -115,14 +117,28 @@ const FormComponent = () => {
 				</div>
 
 				<div className="formfield">
-					<label htmlFor="twitter">Comments: </label>
+					<label htmlFor="twitter">Twitter: </label>
 					<Field 
 						name='social.twitter' 
 					/>
 					<ErrorMessage name='social.twitter' component={Error} />
 				</div>
+
+				<div className="formfield">
+					<label htmlFor="phonenumber1">Phone Number One: </label>
+					<Field 
+						name='phoneNumbers[0]' 
+					/>
+					<ErrorMessage name='phoneNumbers[0]' component={Error} />
 				</div>
 
+				<div className="formfield">
+					<label htmlFor="phonenumbers2">Phone Number Two: </label>
+					<Field 
+						name='phoneNumbers[1]' 
+					/>
+					<ErrorMessage name='phoneNumbers[1]' component={Error} />
+				</div>
 				<button type='submit'>Submit</button> 
 			</Form>
 		</Formik>
