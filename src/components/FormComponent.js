@@ -7,7 +7,9 @@ const FormComponent = () => {
 	const initialValues = {
 		firstname : '',
 		lastname : '',
-		password: ''
+		password: '',
+		comment: '',
+		address:''
 	}
 
 	const onSubmit = values => {
@@ -43,6 +45,7 @@ const FormComponent = () => {
 					<Field 
 						type="text" 
 						name='firstname' 
+						placeholder='First Name'
 					/>
 					<ErrorMessage name='firstname' />
 				</div>
@@ -51,7 +54,8 @@ const FormComponent = () => {
 					<label htmlFor="lastname">Lastname</label>
 					<Field 
 						type="text" 
-						name='lastname' 
+						name='lastname'
+						placeholder='Last Name'
 					/>
 					<ErrorMessage name='lastname' />
 				</div>
@@ -61,8 +65,36 @@ const FormComponent = () => {
 					<Field 
 						type="password" 
 						name='password' 
+						placeholder='Password'
 					/>
 					<ErrorMessage name='password' />
+				</div>
+
+				<div className="formfield">
+					<label htmlFor="comment">Comments: </label>
+					<Field 
+						as="textarea" 
+						name='comment' 
+						placeholder='Type your comment here...'
+					/>
+					<ErrorMessage name='comment' />
+				</div>
+
+
+				<div className="formfield">
+					<label htmlFor="comment">Address: </label>
+					<Field name='address'> 
+						{props => {
+							const {field, form, meta } = props
+							return (
+								<div>
+									<input type='text' {...field} />
+									{meta.touched && meta.error ? <div>{meta.error}</div> : null}
+								</div>
+							)
+						}}
+					</Field>
+					<ErrorMessage name='comment' />
 				</div>
 
 				<button type='submit'>Submit</button> 
