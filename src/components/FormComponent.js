@@ -1,5 +1,5 @@
 import React from 'react';
-import { Formik, Form , Field, ErrorMessage} from 'formik'
+import { Formik, Form , Field, ErrorMessage, FieldArray} from 'formik'
 import * as Yup from 'yup'
 import Error from './Error.js'
 
@@ -15,7 +15,8 @@ const FormComponent = () => {
 			facebook:'',
 			twitter: ''
 		},
-		phoneNumbers : ['','']
+		phoneNumbers : ['',''],
+		phNum: ['']
 	}
 
 	const onSubmit = values => {
@@ -139,6 +140,35 @@ const FormComponent = () => {
 					/>
 					<ErrorMessage name='phoneNumbers[1]' component={Error} />
 				</div>
+
+				<div className="formfield">
+					<label htmlFor="phonenumbers2">Phone Number Special: </label>
+						<FieldArray name='phNum' >
+							{
+								fieldArrayProps => {
+									const {push, remove, form} = fieldArrayProps
+									const {values} = form
+									const {phNum} = values
+									return (
+										<div>
+											{
+												phNum.map((no , index) => (
+													<div key={index}>
+														<Field name={`phNum[${index}]`}/>
+														{index > 0 && (
+															<button type='button' onClick={() => remove('')} > - </button>
+														)}
+														<button type='button' onClick={() => push('')} > + </button>
+													</div>
+												))
+											}
+										</div>
+									)
+								}
+							}
+						</FieldArray>
+				</div>
+
 				<button type='submit'>Submit</button> 
 			</Form>
 		</Formik>
