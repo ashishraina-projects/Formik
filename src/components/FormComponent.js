@@ -1,5 +1,5 @@
 import React from 'react';
-import { Formik, Form , Field, ErrorMessage, FieldArray} from 'formik'
+import { Formik, Form , Field, ErrorMessage, FieldArray , FastField} from 'formik'
 import * as Yup from 'yup'
 import Error from './Error.js'
 
@@ -95,8 +95,9 @@ const FormComponent = () => {
 
 				<div className="formfield">
 					<label htmlFor="comment">Address: </label>
-					<Field name='address'> 
+					<FastField name='address'> 
 						{props => {
+							console.log("1")
 							const {field, form, meta } = props
 							return (
 								<div>
@@ -105,7 +106,7 @@ const FormComponent = () => {
 								</div>
 							)
 						}}
-					</Field>
+					</FastField>
 					<ErrorMessage name='address' />
 				</div>
 
