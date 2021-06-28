@@ -45,6 +45,8 @@ const FormComponent = () => {
 			initialValues={initialValues}
 			validationSchema={validationSchema}
 			onSubmit={onSubmit}
+			validateOnChange={false}
+			validateOnBlur={false}
 		>
 			<Form>
 				<div className="formfield">
@@ -91,7 +93,6 @@ const FormComponent = () => {
 					/>
 					<ErrorMessage name='comment' component={Error} />
 				</div>
-
 
 				<div className="formfield">
 					<label htmlFor="comment">Address: </label>
@@ -150,6 +151,7 @@ const FormComponent = () => {
 									const {push, remove, form} = fieldArrayProps
 									const {values} = form
 									const {phNum} = values
+									console.log("Form Errors : ", form.errors)
 									return (
 										<div>
 											{
