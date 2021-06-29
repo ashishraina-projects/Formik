@@ -29,6 +29,14 @@ const FormComponent = () => {
 		password : Yup.string().required('Password is required')
 	})
 
+	const validateComment = value => {
+		let error;
+		if(!value){
+			error = 'Required!!'
+		}
+		return error
+	}
+
 	// const formik = useFormik({
 	// 	initialValues ,
 	// 	onSubmit ,
@@ -45,8 +53,8 @@ const FormComponent = () => {
 			initialValues={initialValues}
 			validationSchema={validationSchema}
 			onSubmit={onSubmit}
-			validateOnChange={false}
-			validateOnBlur={false}
+			// validateOnChange={false}
+			// validateOnBlur={false}
 		>
 			<Form>
 				<div className="formfield">
@@ -90,6 +98,7 @@ const FormComponent = () => {
 						as="textarea" 
 						name='comment' 
 						placeholder='Type your comment here...'
+						validate={validateComment}
 					/>
 					<ErrorMessage name='comment' component={Error} />
 				</div>
