@@ -56,133 +56,142 @@ const FormComponent = () => {
 			// validateOnChange={false}
 			// validateOnBlur={false}
 		>
-			<Form>
-				<div className="formfield">
-					<label htmlFor="firstname">Name</label>
-					<Field 
-						type="text" 
-						name='firstname' 
-						placeholder='First Name'
-					/>
-					<ErrorMessage name='firstname' component={Error} />
-				</div>
+			{
+				formik => {
+					console.log("formik props", formik)
+					return (
+						<Form>
+							<div className="formfield">
+								<label htmlFor="firstname">Name</label>
+								<Field 
+									type="text" 
+									name='firstname' 
+									placeholder='First Name'
+								/>
+								<ErrorMessage name='firstname' component={Error} />
+							</div>
 
-				<div className="formfield">
-					<label htmlFor="lastname">Lastname</label>
-					<Field 
-						type="text" 
-						name='lastname'
-						placeholder='Last Name'
-					>
-					</Field>
-					<ErrorMessage name='lastname' >
-						{
-							(errorMsg) => <div className='error'>{errorMsg}</div>
-						}
-					</ErrorMessage>
-				</div>
+							<div className="formfield">
+								<label htmlFor="lastname">Lastname</label>
+								<Field 
+									type="text" 
+									name='lastname'
+									placeholder='Last Name'
+								>
+								</Field>
+								<ErrorMessage name='lastname' >
+								{
+								(errorMsg) => <div className='error'>{errorMsg}</div>
+								}
+								</ErrorMessage>
+							</div>
 
-				<div className="formfield">
-					<label htmlFor="password">Password</label>
-					<Field 
-						type="password" 
-						name='password' 
-						placeholder='Password'
-					/>
-					<ErrorMessage name='password' component={Error}/>
-				</div>
+							<div className="formfield">
+								<label htmlFor="password">Password</label>
+								<Field 
+									type="password" 
+									name='password' 
+									placeholder='Password'
+								/>
+								<ErrorMessage name='password' component={Error}/>
+							</div>
 
-				<div className="formfield">
-					<label htmlFor="comment">Comments: </label>
-					<Field 
-						as="textarea" 
-						name='comment' 
-						placeholder='Type your comment here...'
-						validate={validateComment}
-					/>
-					<ErrorMessage name='comment' component={Error} />
-				</div>
+							<div className="formfield">
+								<label htmlFor="comment">Comments: </label>
+								<Field 
+									as="textarea" 
+									name='comment' 
+									placeholder='Type your comment here...'
+									validate={validateComment}
+								/>
+								<ErrorMessage name='comment' component={Error} />
+							</div>
 
-				<div className="formfield">
-					<label htmlFor="comment">Address: </label>
-					<FastField name='address'> 
-						{props => {
-							console.log("1")
-							const {field, form, meta } = props
-							return (
-								<div>
-									<input type='text' {...field} />
-									{meta.touched && meta.error ? <div>{meta.error}</div> : null}
-								</div>
-							)
-						}}
-					</FastField>
-					<ErrorMessage name='address' />
-				</div>
+							<div className="formfield">
+								<label htmlFor="comment">Address: </label>
+								<FastField name='address'> 
+									{props => {
+										console.log("1")
+										const {field, form, meta } = props
+										return (
+											<div>
+												<input type='text' {...field} />
+												{meta.touched && meta.error ? <div>{meta.error}</div> : null}
+											</div>
+										)
+									}}
+								</FastField>
+								<ErrorMessage name='address' />
+							</div>
 
-				<div className="formfield">
-					<label htmlFor="facebook">Facebook: </label>
-					<Field 
-						name='social.facebook' 
-					/>
-					<ErrorMessage name='social.twitter' component={Error} />
-				</div>
+							<div className="formfield">
+								<label htmlFor="facebook">Facebook: </label>
+								<Field name='social.facebook' />
+								<ErrorMessage name='social.twitter' component={Error} />
+							</div>
 
-				<div className="formfield">
-					<label htmlFor="twitter">Twitter: </label>
-					<Field 
-						name='social.twitter' 
-					/>
-					<ErrorMessage name='social.twitter' component={Error} />
-				</div>
+							<div className="formfield">
+								<label htmlFor="twitter">Twitter: </label>
+								<Field name='social.twitter' />
+								<ErrorMessage name='social.twitter' component={Error} />
+							</div>
 
-				<div className="formfield">
-					<label htmlFor="phonenumber1">Phone Number One: </label>
-					<Field 
-						name='phoneNumbers[0]' 
-					/>
-					<ErrorMessage name='phoneNumbers[0]' component={Error} />
-				</div>
+							<div className="formfield">
+								<label htmlFor="phonenumber1">Phone Number One: </label>
+								<Field name='phoneNumbers[0]' />
+								<ErrorMessage name='phoneNumbers[0]' component={Error} />
+							</div>
 
-				<div className="formfield">
-					<label htmlFor="phonenumbers2">Phone Number Two: </label>
-					<Field 
-						name='phoneNumbers[1]' 
-					/>
-					<ErrorMessage name='phoneNumbers[1]' component={Error} />
-				</div>
+							<div className="formfield">
+								<label htmlFor="phonenumbers2">Phone Number Two: </label>
+								<Field name='phoneNumbers[1]' />
+								<ErrorMessage name='phoneNumbers[1]' component={Error} />
+							</div>
 
-				<div className="formfield">
-					<label htmlFor="phonenumbers2">Phone Number Special: </label>
-						<FieldArray name='phNum' >
-							{
-								fieldArrayProps => {
-									const {push, remove, form} = fieldArrayProps
-									const {values} = form
-									const {phNum} = values
-									console.log("Form Errors : ", form.errors)
-									return (
-										<div>
-											{
-												phNum.map((no , index) => (
-													<div key={index}>
+							<div className="formfield">
+								<label htmlFor="phonenumbers2">Phone Number Special: </label>
+								<FieldArray name='phNum' >
+									{
+										fieldArrayProps => {
+											const {push, remove, form} = fieldArrayProps
+											const {values} = form
+											const {phNum} = values
+											console.log("Form Errors : ", form.errors)
+											return (
+												<div>
+													{
+														phNum.map((no , index) => (
+														<div key={index}>
 														<Field name={`phNum[${index}]`}/>
 														{index > 0 && (
-															<button type='button' onClick={() => remove('')} > - </button>
+														<button type='button' onClick={() => remove('')} > - </button>
 														)}
 														<button type='button' onClick={() => push('')} > + </button>
-													</div>
-												))
-											}
-										</div>
-									)
-								}
-							}
-						</FieldArray>
-				</div>
+														</div>
+														))
+													}
+												</div>
+											)
+										}
+									}
+								</FieldArray>
+							</div>
+							<button type='button' onClick={() => formik.validateField('comment')}>Validate Comment</button>
+							<button type='button' onClick={() => formik.validateForm()}>Validate Form</button>
+							<button type='button' onClick={() => formik.setFieldTouched('comment')}>Touch Comment</button>
 
-				<button type='submit'>Submit</button> 
-			</Form>
+							<button type='button' onClick={() => formik.setTouched({
+								firstname : true,
+								lastname: true,
+								password: true,
+								comment: true
+							})}>Touch Form</button>
+
+							<button type='submit'>Submit</button> 
+						</Form>
+					)
+				}
+			}
 		</Formik>
 	)
 }
